@@ -17,8 +17,7 @@ module.exports = defineConfig({
     appleMobileWebAppCapable: "yes", // Habilitar el modo pantalla completa en dispositivos iOS
     appleMobileWebAppStatusBarStyle: "#37b7e3", // Color de la barra de estado en dispositivos iOS
     iconPaths: {
-      favicon32: "./img/icons/logo-icon-pwa-white.png",
-      favicon16: "./img/icons/logo-icon-pwa-white.png",
+      favicon134: "./img/icons/logo-icon-pwa-white.png",
       appleTouchIcon: "./img/icons/logo-icon-pwa.png",
       maskIcon: "./img/icons/logo-icon-pwa.png",
       msTileImage: "./img/icons/logo-icon-pwa.png",

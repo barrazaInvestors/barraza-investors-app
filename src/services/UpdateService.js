@@ -13,7 +13,6 @@ class UpdateService {
   }
   async obtenerDatos(copy) {
     this.data.value = copy;
-    console.log(JSON.stringify(copy));
     //Actualizar: hay que enviar una copia actualizada de los datos porque se borran los datos anteriores
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");

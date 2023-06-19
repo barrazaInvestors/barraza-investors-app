@@ -74,7 +74,6 @@ const actualizarVentas = async () => {
   // Si las variables son true es porque hubo una modificacion en el json
   if (getUpdate) {
     bus.getUpdate = getUpdate[0];
-    console.log(getUpdate[0])
   }
   // Reiniciando los valores
   setTimeout(() => {

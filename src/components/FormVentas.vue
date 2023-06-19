@@ -11,9 +11,9 @@
     <input type="number" placeholder="Precio de venta" class="form-control input-form" v-model.number="precioDeVentaHistorial" step="0.01" required>    
     <div id="emailHelp" class="form-text">Fecha de compra</div>
 
-    <input type="date" format="yyyy-mm-dd" placeholder="Fecha de Compra" class="form-control input-form"  v-model="fechaCompra" required>
+    <input type="date" format="yyyy/mm/dd" placeholder="Fecha de Compra" class="form-control input-form"  v-model="fechaCompra" required>
     <div id="emailHelp" class="form-text">Fecha de venta</div>
-    <input type="date" format="yyyy-mm-dd" placeholder="Fecha de venta" class="form-control input-form" v-model="fechaVenta" required>
+    <input type="date" format="yyyy/mm/dd" placeholder="Fecha de venta" class="form-control input-form" v-model="fechaVenta" required>
     <span class="success" v-if="correcto">Añadido con éxito</span>
   <button class="btn btn-primary">Añadir</button>
   <br>
@@ -55,7 +55,7 @@ const completarInputs = () => {
   for (let i = 0; i < getJsonbin.length; i++) {
     if (getJsonbin[i].simbolo === simboloHistorial.value) {
       cantidadHistorial.value = getJsonbin[i].cantidad
-      precioDeCompraHistorial.value = getJsonbin[i].precio
+      precioDeCompraHistorial.value = getJsonbin[i].precio.replace(',', '.')
     }
   }
 }

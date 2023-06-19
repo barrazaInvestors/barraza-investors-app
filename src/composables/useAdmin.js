@@ -129,7 +129,7 @@ export function useAdmin() {
       fecha_compra: fechaCompraVentas,
       fecha_venta: fechaVentaVentas,
     });
-    //console.log(getJsonbin);
+    console.log(getJsonbin);
     const updateService = new UpdateService();
     await updateService.obtenerDatos(await getJsonbin);
   };

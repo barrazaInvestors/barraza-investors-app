@@ -83,7 +83,8 @@ export function useAdmin() {
           if (getJsonbin[e][i].nombre === nombreInversionista) {
             getJsonbin[e][i].aporte =
               Number(getJsonbin[e][i].aporte) + Number(aporteInversionista);
-            getJsonbin[e][i].reinversion = Number(reinverionInversionista);
+            getJsonbin[e][i].reinversion =
+              getJsonbin[e][i].reinversion + Number(reinverionInversionista);
           }
         }
         //console.log(getJsonbin[e]);

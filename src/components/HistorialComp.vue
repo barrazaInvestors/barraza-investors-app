@@ -17,7 +17,7 @@
       <td>{{ accion.precio_venta }}</td>
       <td>{{ accion.cantidad }}</td>
       <td :class="{'verde': accion.ganancia_perdida > 0, 'rojo': accion.ganancia_perdida < 0}">{{ accion.ganancia_perdida }}</td>
-      <td>{{ accion.rentabilidad_anualizada }}</td>
+      <td>{{ accion.rentabilidad_anualizada }} %</td>
       <td class="small">{{ accion.fecha_compra }}</td>
       <td class="small">{{ accion.fecha_venta }}</td>
 

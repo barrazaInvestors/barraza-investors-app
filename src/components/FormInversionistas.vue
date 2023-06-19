@@ -5,8 +5,8 @@
           <option value="" placeholder-select disabled selected hidden>Nombre</option>
           <option v-for="el in nombres" :key="el" :value="el">{{ el }}</option>
         </select>
-        <input type="number" placeholder="Aporte" class="form-control input-form" v-model.number="aporteInversionista" required>
-        <input type="number" placeholder="Reinversión" class="form-control input-form" v-model.number="reinversionInversionista">
+        <input type="number" placeholder="Aporte" class="form-control input-form" v-model.number="aporteInversionista">
+        <input type="number" placeholder="Reinversión" class="form-control input-form" v-model.number="reinversionInversionista" step="0.01">
         <span class="success" v-if="correcto">Añadido con éxito</span>
         <button class="btn btn-primary">Añadir</button>
       </form>

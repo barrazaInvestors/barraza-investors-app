@@ -126,8 +126,8 @@ export function useAdmin() {
       precio_compra: precioCompraVentas,
       precio_venta: precioVentaVentas,
       cantidad: cantidadVentas,
-      fecha_compra: fechaVentaVentas,
-      fecha_venta: fechaCompraVentas,
+      fecha_compra: fechaCompraVentas,
+      fecha_venta: fechaVentaVentas,
     });
     //console.log(getJsonbin);
     const updateService = new UpdateService();

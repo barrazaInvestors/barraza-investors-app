@@ -23,15 +23,9 @@ module.exports = defineConfig({
       background_color: "#37b7e3", // Color de fondo de la pantalla de carga inicial
       icons: [
         {
-          src: "./img/icons/logo-icon-pwa-white.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
           src: "./img/icons/logo-icon-pwa.png",
           sizes: "192x192",
           type: "image/png",
-          purpose: "maskable any",
         },
       ],
     },

@@ -37,7 +37,7 @@ const routes = [
   },
 ];
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(), //quite esto process.env.BASE_URL
   routes,
 });
 router.beforeEach((to, from, next) => {

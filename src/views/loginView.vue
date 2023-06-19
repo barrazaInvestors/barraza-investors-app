@@ -41,7 +41,6 @@ const autenticacion = () => {
     }, 1500);
   
   } else {
-    store.token = false
     router.push({ path: "/admin" })
     alert('¡Bienvenido a Barraza Invertors, Luis!')
   }

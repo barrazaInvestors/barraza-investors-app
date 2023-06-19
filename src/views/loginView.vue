@@ -42,7 +42,7 @@ const autenticacion = () => {
   
   } else {
     router.push({ path: "/admin" })
-    alert('¡Bienvenido a Barraza Invertors, Luis!')
+    //alert('¡Bienvenido a Barraza Invertors, Luis!')
   }
 }
 </script>

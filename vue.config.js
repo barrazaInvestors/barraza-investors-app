@@ -50,7 +50,7 @@ module.exports = defineConfig({
           type: "image/png",
         },
       ],
-      start_url: "/home", // URL de inicio de la aplicación
+      start_url: "/", // URL de inicio de la aplicación
       display: "standalone", // Estilo de visualización de la aplicación
       background_color: "#37b7e3", // Color de fondo de la pantalla de carga inicial
     },

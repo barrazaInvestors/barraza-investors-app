@@ -23,12 +23,12 @@ module.exports = defineConfig({
       display: "standalone", // Estilo de visualización de la aplicación
       background_color: "#37b7e3", // Color de fondo de la pantalla de carga inicial
       iconPaths: {
-        favicon: "./img/icons/logo-icon-pwa-white.png",
+        favicon: "./img/icons/logo-icon-pwa.png",
       },
       icons: [
         // Iconos para la pantalla de inicio
         {
-          src: "./img/icons/logo-icon-pwa-white.png",
+          src: "./img/icons/logo-icon-pwa.png",
           sizes: "512x512",
           type: "image/png",
         },

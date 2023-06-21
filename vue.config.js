@@ -28,31 +28,6 @@ module.exports = defineConfig({
       icons: [
         // Iconos para la pantalla de inicio
         {
-          src: "./img/icons/logo-icon-pwa-white.png", // Ruta relativa al archivo de icono
-          sizes: "48x48",
-          type: "image/png",
-        },
-        {
-          src: "./img/icons/logo-icon-pwa-white.png",
-          sizes: "72x72",
-          type: "image/png",
-        },
-        {
-          src: "./img/icons/logo-icon-pwa-white.png",
-          sizes: "96x96",
-          type: "image/png",
-        },
-        {
-          src: "./img/icons/logo-icon-pwa-white.png",
-          sizes: "144x144",
-          type: "image/png",
-        },
-        {
-          src: "./img/icons/logo-icon-pwa-white.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
           src: "./img/icons/logo-icon-pwa-white.png",
           sizes: "512x512",
           type: "image/png",

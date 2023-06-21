@@ -62,8 +62,6 @@ import FormInversionistas from '@/components/FormInversionistas.vue'
 import InversionistaComp from '@/components/InversionistaComp.vue';
 import HistorialComp from '@/components/HistorialComp.vue';
 import PortafolioComp from '@/components/PortafolioComp.vue';
-//import DonutPortafolioComp from '@/components/DonutPortafolioComp.vue'
-//import DonutAccionistaComp from '@/components/DonutAccionistaComp.vue'
 
 let btnAccionistas = ref(false)
 let btnPortafolio = ref(true)

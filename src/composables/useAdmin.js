@@ -55,7 +55,7 @@ export function useAdmin() {
     const updateService = new UpdateService();
     await updateService.obtenerDatos(await getJsonbin);
     const getUpdate = updateService.getData().value.acciones;
-    console.log(getUpdate);
+    //console.log(getUpdate);
     return getUpdate;
   };
   const añadirInversionista = async (
@@ -130,7 +130,7 @@ export function useAdmin() {
       fecha_compra: fechaCompraVentas,
       fecha_venta: fechaVentaVentas,
     });
-    console.log(getJsonbin);
+    //console.log(getJsonbin);
     const updateService = new UpdateService();
     await updateService.obtenerDatos(await getJsonbin);
   };

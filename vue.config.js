@@ -17,13 +17,13 @@ module.exports = defineConfig({
     appleMobileWebAppCapable: "yes", // Habilitar el modo pantalla completa en dispositivos iOS
     appleMobileWebAppStatusBarStyle: "#37b7e3", // Color de la barra de estado en dispositivos iOS
     manifestOptions: {
-      name: "",
+      name: "Barraza Investors",
       short_name: "Barraza Investors",
       start_url: "/", // URL de inicio de la aplicación
       display: "standalone", // Estilo de visualización de la aplicación
       background_color: "#37b7e3", // Color de fondo de la pantalla de carga inicial
       iconPaths: {
-        favicon: "./img/icons/logo-icon-pwa.png",
+        favicon: "./img/icons/logo-icon-pwa-white.png",
       },
       icons: [
         // Iconos para la pantalla de inicio

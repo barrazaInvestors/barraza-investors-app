@@ -95,7 +95,7 @@ export function useAdmin() {
           aporte: aporteInversionista,
           reinversion: reinverionInversionista,
         });
-        console.log(getJsonbin);
+        //console.log(getJsonbin);
       }
     }
     //Enviando datos al jsonbin

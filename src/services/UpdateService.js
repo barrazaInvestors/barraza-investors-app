@@ -33,7 +33,7 @@ class UpdateService {
       const response = await fetchAll.json();
       console.log(response);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   }
 }

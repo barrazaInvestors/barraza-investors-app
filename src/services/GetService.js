@@ -34,7 +34,7 @@ class JsonbinService {
       this.jsonbin.value = response;
       //console.log(this.jsonbin.value);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   }
   async fetchFinnhub(e) {
@@ -47,7 +47,7 @@ class JsonbinService {
         //console.log(jsonFinn);
         results.push(jsonFinn.c);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     }
     this.finnhub.value = results;
@@ -62,7 +62,7 @@ class JsonbinService {
       const jsonExchange = await responseExchange.json();
       results.push(jsonExchange);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
     this.exchange.value = results[0].conversion_rates.COP;
     //console.log(this.exchange.value);

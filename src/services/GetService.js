@@ -54,6 +54,7 @@ class JsonbinService {
       if (message.type === 'trade') {
         var newPrice = message.data[0].p;
         this.finnhub.price = newPrice;
+        console.log(this.finnhub.value);
       }
     });
   }

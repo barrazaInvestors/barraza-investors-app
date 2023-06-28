@@ -44,17 +44,20 @@ class JsonbinService {
     // Abriendo coneccion
     this.socket.addEventListener("open", () => {
       for (let i = 0; i < e.length; i++) {
-      this.socket.send(JSON.stringify({ type: "subscribe", symbol: e[i].simbolo }));        
+        this.socket.send(
+          JSON.stringify({ type: "subscribe", symbol: e[i].simbolo })
+        );
+        console.log();
       }
     });
 
     // Escuchando los mensajes
     this.socket.addEventListener("message", (event) => {
       var message = JSON.parse(event.data);
-      if (message.type === 'trade') {
+      if (message.type === "trade") {
         var newPrice = message.data[0].p;
         this.finnhub.price = newPrice;
-        //console.log(this.finnhub.value);
+        console.log(this.finnhub.value);
       }
     });
   }

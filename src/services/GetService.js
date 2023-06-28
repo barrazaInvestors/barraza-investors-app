@@ -2,14 +2,14 @@ import { reactive } from "vue";
 /*   014937b6-3067-435d-8838-7a3ebcdf5c7a
 Id getPantry json    */
 
-//Este es el servicio para leer los datos
+// Este es el servicio para leer los datos
 class JsonbinService {
   jsonbin;
   finnhub;
   exchange;
   constructor() {
     this.jsonbin = reactive([]);
-    this.finnhub = reactive([]);
+    this.finnhub = reactive({ price: null });
     this.exchange = reactive({ value: 0 });
   }
 
@@ -38,7 +38,30 @@ class JsonbinService {
     }
   }
   async fetchFinnhub(e) {
-    const results = [];
+
+        this.socket = new WebSocket("wss://ws.finnhub.io?token=cf7brsqad3iad4t5uef0cf7brsqad3iad4t5uefg");
+
+    // Abriendo coneccion
+    this.socket.addEventListener("open", () => {
+      for (let i = 0; i < e.length; i++) {
+      this.socket.send(JSON.stringify({ type: "subscribe", symbol: e[i].simbolo }));        
+      }
+    });
+
+    // Escuchando los mensajes
+    this.socket.addEventListener("message", (event) => {
+      var message = JSON.parse(event.data);
+      if (message.type === 'trade') {
+        var newPrice = message.data[0].p;
+        this.finnhub.price = newPrice;
+      }
+    });
+  }
+
+
+
+
+    /*const results = [];
     for (let i = 0; i < e.length; i++) {
       try {
         const urlFinnhub = `https://finnhub.io/api/v1/quote?symbol=${e[i].simbolo}&token=cf7brsqad3iad4t5uef0cf7brsqad3iad4t5uefg`;
@@ -52,7 +75,8 @@ class JsonbinService {
     }
     this.finnhub.value = results;
     //console.log(this.finnhub.value);
-  }
+    */
+  
   async fetchExchange() {
     const results = [];
     try {

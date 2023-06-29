@@ -1,6 +1,7 @@
 <template>
   <!-- seccion de imagen destacada -->
-  <section class="seccion-logo mt-4">
+<div class="container-fluid">
+    <section class="container-sm mt-4 seccion-logo">
     <div class="logo-barraza">
       <img
       src="../assets/logo-3D_1.png" class="one"/>
@@ -9,6 +10,7 @@
     </div>
     <p class="aparecer">Somos un fondo de inversión familiar <br> en la bolsa</p>
   </section>
+</div>
   <!-- menu -->
   <div class="container-fluid nav-fluid">
     <nav class="navbar container-sm">
@@ -157,7 +159,7 @@ nav {
 }
 .seccion-logo{
   height: 50vh;
-  width: 100%;
+  /*width: 100%;*/
   display: flex;
  flex-direction: column;
  align-items: center;
@@ -248,7 +250,7 @@ nav {
     font-size: 1.6rem;
     p{
       margin-bottom: 0;
-      margin-left: 4rem;
+      /*margin-left: 4rem;*/
       text-align: start;
     }
   }

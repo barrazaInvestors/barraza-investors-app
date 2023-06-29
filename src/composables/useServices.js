@@ -1,6 +1,7 @@
-import { reactive, ref } from "vue";
+import { reactive, ref, toRef } from "vue";
 import JsonbinService from "@/services/GetService";
 /** En este composable hago las operaciones necesarias para obtener los porcentajes, variaciones, etc. de cada accion y para obtener tambien los datos que necesitaré para crearlos graficos */
+/* toRef */
 
 export function useServices() {
   //array de valores de jsonbin
@@ -38,12 +39,14 @@ export function useServices() {
     rentabilidadTotal = reactive([]),
     porcentajesAcciones = reactive([]),
     rentabilidadAnualizada = reactive([]);
-  //array de datos de acciones, inversionistas, ventas
+  // Array de datos de acciones, inversionistas, ventas
 
   let responseAcciones = reactive([]),
     responseInversionistas = reactive([]),
     responseVentas = reactive([]),
     responseTotales = reactive([]);
+  let finnhubValue = reactive({}),
+    socket;
   //
   const obtenerDatos = async () => {
     const jsonbinService = new JsonbinService();
@@ -53,11 +56,12 @@ export function useServices() {
     const getFinn = jsonbinService.getFinn();
     await jsonbinService.fetchExchange();
     const getExchange = jsonbinService.getExchange();
-
+    finnhubValue.value = reactive(getFinn);
     responseAcciones.push(getJsonbin.value.acciones);
     responseInversionistas.push(getJsonbin.value.inversionistas);
     responseVentas.push(getJsonbin.value.ventas);
 
+    //console.log(finnhubValue.value);
     //empujando valores individuales
 
     for (let i = 0; i < getJsonbin.value.acciones.length; i++) {
@@ -76,7 +80,7 @@ export function useServices() {
       inversionistasReinversion.push(
         Number(await getJsonbin.value.inversionistas[j].reinversion)
       );
-      //sacando suma de aporte más reinversion
+      // Sacando suma de aporte más reinversion
       totalAporteMasReinversion.value +=
         inversionistasReinversion[j] + inversionistasAporte[j];
       totalAporte.value += inversionistasAporte[j];
@@ -103,7 +107,7 @@ export function useServices() {
       fechaVenta.push(
         await getJsonbin.value.ventas[k].fecha_venta.substring(2)
       );
-      //datos computados de ventas
+      // Datos computados de ventas
       rentabilidadTotal.push(
         (ventasPrecioVenta[k] * ventasCantidad[k] -
           ventasPrecioCompra[k] * ventasCantidad[k]) /
@@ -111,7 +115,7 @@ export function useServices() {
       );
       diferencia.push((fechaFin[k] - fechaInicio[k]) / (1000 * 60 * 60 * 24));
 
-      //sacando rentabilidad anualizada con potencia
+      // Sacando rentabilidad anualizada con potencia
       let cortar = (
         Math.pow(1 + rentabilidadTotal[k], 1 / (diferencia[k] * 0.00274) - 1) *
         100
@@ -176,13 +180,14 @@ export function useServices() {
         accionesPrecio[l].toFixed(2)
       );
       responseAcciones[0][l].precio_actual = Number(
-        getFinn.value[l].toFixed(2)
+        finnhubValue.value.value[l].toFixed(2)
       );
       responseAcciones[0][l].total_compra = Number(accionesTotal[l].toFixed(2));
       responseAcciones[0][l].total_actual = valorTotalActual[l];
       responseAcciones[0][l].ganancia_porcentaje = gananciaPorcentaje[l];
       responseAcciones[0][l].ganancia_dolares = gananciaDolares[l];
     }
+    //console.log(responseAcciones[0]);
 
     for (let n = 0; n < responseInversionistas[0].length; n++) {
       accionistasValorActual.push(
@@ -234,11 +239,58 @@ export function useServices() {
       ),
       new Intl.NumberFormat("de-DE").format(valorEstimadoFondo.value.toFixed(2))
     );
-  };
 
+    socket = new WebSocket(
+      "wss://ws.finnhub.io?token=cf7brsqad3iad4t5uef0cf7brsqad3iad4t5uefg"
+    );
+
+    // Abriendo coneccion
+    socket.addEventListener("open", () => {
+      for (let i = 0; i < responseAcciones[0].length; i++) {
+        socket.send(
+          JSON.stringify({
+            type: "subscribe",
+            symbol: responseAcciones[0][i].simbolo,
+          })
+        );
+      }
+    });
+
+    // Escuchando los mensajes
+    // Aqui vigilo y reasigno los valores que cambian en el websocket a sus correspondientes variables
+    socket.addEventListener("message", (event) => {
+      let message = JSON.parse(event.data);
+      if (message.type === "trade") {
+        //console.log(message.data, responseAcciones);
+        for (let i = 0; i < finnhubValue.value.value.length; i++) {
+          //console.log(message.data[0]);
+          if (responseAcciones[0][i].simbolo === message.data[0].s) {
+            finnhubValue.value.value[i] = message.data[0].p;
+            // Reasignando los valores
+            responseAcciones[0][i].precio_actual = Number(
+              finnhubValue.value.value[i].toFixed(2)
+            );
+            responseAcciones[0][i].variacion = (
+              finnhubValue.value.value[i] - accionesPrecio[i]
+            ).toFixed(2);
+            responseAcciones[0][i].total_actual = (
+              finnhubValue.value.value[i] * accionesCantidad[i]
+            ).toFixed(2);
+            responseAcciones[0][i].ganancia_porcentaje = (
+              ((finnhubValue.value.value[i] * accionesCantidad[i]) /
+                accionesTotal[i] -
+                1) *
+              100
+            ).toFixed(2);
+          }
+        }
+      }
+    });
+  };
   return {
     obtenerDatos,
     responseAcciones,
+    finnhubValueRef: toRef(finnhubValue), // Esta variable es la que cambia en el websocket
     responseInversionistas,
     responseVentas,
     responseTotales,

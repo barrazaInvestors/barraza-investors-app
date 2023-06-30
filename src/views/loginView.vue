@@ -15,8 +15,8 @@
       
       <div class="pass-icon-container">
       <input type="password" v-model="pass" class="form-control input-form" id="exampleInputPassword1" placeholder="Contraseña" required>
-        <v-icon name="pr-eye" scale="1.8" class="pass-icon" v-if="visible" @click="isTrue"/>
-        <v-icon name="pr-eye-slash" scale="1.8" class="pass-icon" v-if="oculto" @click="isTrue"/>
+        <v-icon name="pr-eye" scale="1.8" class="pass-icon" v-if="visible" @click="showPass"/>
+        <v-icon name="pr-eye-slash" scale="1.8" class="pass-icon" v-if="oculto" @click="showPass"/>
       </div>
       <span v-if="incorrecto" class="error mb-2">Datos incorrectos</span>
   
@@ -38,7 +38,7 @@ let incorrecto = ref(false)
 let oculto = ref(true)
 let visible = ref(false)
 
-const isTrue = () => {
+const showPass = () => {
   if (pass.value) {
     visible.value = !visible.value
     oculto.value = !oculto.value

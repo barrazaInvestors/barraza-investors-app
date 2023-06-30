@@ -282,6 +282,10 @@ export function useServices() {
                 1) *
               100
             ).toFixed(2);
+            responseAcciones[0][i].ganancia_dolares = (
+              finnhubValue.value.value[i] * accionesCantidad[i] -
+              accionesTotal[i]
+            ).toFixed(2);
           }
         }
       }

@@ -67,11 +67,8 @@ class JsonbinService {
       results.push(jsonExchange.conversion_rates.COP);
       //console.log(results[0]);
     } catch (err) {
-      //console.log("Ocurrio un error:", err.message);
       // Si ocurre un error en la llamada a la api usaremos la otra api
-      alert(
-        "Ocurrio un error con Exchange rate; usaremos Open Exchange para el cambio de divisas"
-      );
+      //alert("Ocurrio un error con Exchange rate; usaremos Open Exchange para el cambio de divisas");
 
       const options = {
         method: "GET",

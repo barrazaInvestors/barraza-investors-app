@@ -11,9 +11,13 @@
     <form @submit.prevent="autenticacion" class="aparecer container-sm d-flex flex-column align-items-center mt-sm-3 mt-lg-3 mt-sm-3">
       <leyend class="mb-5 fs-3 text">Login</leyend>
    
-      <input type="email" v-model="email" class="form-control input-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required>
- 
+      <input type="email" v-model="email" class="form-control input-form mb-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required>
+      
+      <div class="pass-icon-container">
       <input type="password" v-model="pass" class="form-control input-form" id="exampleInputPassword1" placeholder="Contraseña" required>
+        <v-icon name="pr-eye" scale="1.8" class="pass-icon" v-if="visible" @click="isTrue"/>
+        <v-icon name="pr-eye-slash" scale="1.8" class="pass-icon" v-if="oculto" @click="isTrue"/>
+      </div>
       <span v-if="incorrecto" class="error mb-2">Datos incorrectos</span>
   
       <button type="submit" class="btn btn-primary">Acceder</button>
@@ -31,6 +35,26 @@ const store = useLoginStore() //creando instancia
 let email = ref('')
 let pass = ref('')
 let incorrecto = ref(false)
+let oculto = ref(true)
+let visible = ref(false)
+
+const isTrue = () => {
+  if (pass.value) {
+    visible.value = !visible.value
+    oculto.value = !oculto.value
+      // Aqui verifico si la variable es true o false 
+      //  para mostrar u ocultar, dependiendo de eso convierto 
+      //el input en tipo texto para poder  mostrar el valor que se esta escribiendo
+    const input = document.getElementById('exampleInputPassword1')
+    if (visible.value === true) {
+      input.type = 'text'
+      input.value = pass.value
+        
+      } else {
+        input.type = 'password'
+      }
+    }
+}
 const autenticacion = () => {
   const res = store.auth(email.value, pass.value) //accediendo a la función auth
   if ((res === false || res=== undefined) && !store.token) {
@@ -92,6 +116,29 @@ img {
   font-size: 1rem;
   font-family: 'Cabin', sans-serif;
   animation: texto 2s ease-in-out;
+}
+.pass-icon-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  input {
+    margin-bottom: 0;
+  }
+}
+.pass-icon {
+  position: absolute;
+  top: 50%;
+  right: 2.5rem;
+  transform: translateY(-45%);
+  cursor: pointer;
+  color: $color-placeholder;
+}
+.pass-icon:hover {
+  color: $color-secundario-1;
 }
 .router {
   left: auto;
@@ -160,6 +207,21 @@ img {
         bottom: 5%;
       }
     }
+@media screen and (min-width: 400px) {
+  .pass-icon {
+    right: 3rem;
+  }
+}
+@media screen and (min-width: 500px) {
+  .pass-icon {
+    right: 4rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  .pass-icon {
+    right: 5rem;
+  }
+}
 
 @media screen and (min-width: 1000px) {
   .column-lg{
@@ -168,10 +230,8 @@ img {
     align-items: center;
   }
 
-  input{
-    margin-bottom: 4rem !important;
-  }
-  .router {
+
+.router {
   left: auto;
   right: auto;
   margin: auto;
